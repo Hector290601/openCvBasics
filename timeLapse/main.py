@@ -1,8 +1,19 @@
 import cv2
 import time
+from datetime import datetime
+
+font = cv2.FONT_HERSHEY_SIMPLEX
+org = (50, 50)
+fontScale = 1
+color = (255, 0, 0)
+thickness = 2
 
 def savePhoto(frame, nameString = "foto"):
-    name = nameString + str(time.time()) + ".jpeg"
+    now = datetime.now()
+    dateName = now.strftime("%d/%m/%Y %H:%M:%S")
+    name = nameString + "at" + now.strftime("%d-%m-%Y-%H-%M-%S") + ".jpeg"
+    frame = cv2.putText(frame, dateName, org, font, fontScale, color, thickness, cv2.LINE_AA)
+    print(name)
     cv2.imwrite(name, frame)
 
 def main():
